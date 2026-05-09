@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fine Print — Your Financial Documents, Finally Explained</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#0a0a08;
+  --white:#fafaf7;
+  --paper:#f2ede4;
+  --ink:#1a1a16;
+  --green:#1c4a2e;
+  --green-light:#e8f2eb;
+  --green-mid:#3a7d52;
+  --gold:#b8860b;
+  --gold-light:#fdf6e3;
+  --red:#8b1a1a;
+  --red-light:#fdf0ef;
+  --muted:#6b6558;
+  --border:#ddd8ce;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--ink);font-size:16px;line-height:1.6;overflow-x:hidden}
+
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 2.5rem;background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.logo{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--black);text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo-mark{width:34px;height:34px;background:var(--black);border-radius:4px;display:flex;align-items:center;justify-content:center}
+.logo-mark svg{width:18px;height:18px;fill:var(--white)}
+.nav-cta{background:var(--green);color:var(--white);padding:.55rem 1.35rem;border-radius:6px;text-decoration:none;font-weight:500;font-size:.9rem;transition:background .2s}
+.nav-cta:hover{background:var(--green-mid)}
+
+/* HERO */
+.hero{max-width:860px;margin:0 auto;padding:6rem 2rem 2rem;text-align:center}
+.tag{display:inline-flex;align-items:center;gap:6px;background:var(--gold-light);color:var(--gold);font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .9rem;border-radius:99px;border:1px solid #e8d8a0;margin-bottom:1.75rem}
+h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,4.5rem);line-height:1.08;font-weight:700;margin-bottom:1.25rem;color:var(--black)}
+h1 span{font-style:italic;color:var(--green)}
+.hero p{font-size:1.15rem;color:var(--muted);max-width:520px;margin:0 auto 2.5rem;font-weight:300;line-height:1.7}
+.btn-main{display:inline-flex;align-items:center;gap:10px;background:var(--black);color:var(--white);padding:1.05rem 2.25rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:1rem;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 18px rgba(0,0,0,.18)}
+.btn-main:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.25)}
+.btn-main svg{width:18px;height:18px;fill:var(--gold)}
+.hero-note{font-size:.8rem;color:var(--muted);margin-top:.85rem}
+
+/* DOC PREVIEW */
+.preview-wrap{max-width:680px;margin:3.5rem auto 0;padding:0 1.5rem}
+.preview-label{text-align:center;font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.75rem}
+.browser{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.09)}
+.browser-bar{background:var(--paper);padding:.7rem 1.1rem;display:flex;align-items:center;gap:7px;border-bottom:1px solid var(--border)}
+.dot{width:11px;height:11px;border-radius:50%}
+.url-bar{flex:1;background:var(--white);border:1px solid var(--border);border-radius:5px;padding:.25rem .75rem;font-size:.75rem;color:var(--muted);margin:0 .5rem}
+.browser-body{padding:1.5rem}
+.file-badge{display:inline-flex;align-items:center;gap:8px;background:var(--green-light);border:1px solid #b8d9c4;border-radius:8px;padding:.5rem .9rem;font-size:.82rem;font-weight:500;color:var(--green);margin-bottom:1.25rem}
+.file-badge svg{width:16px;height:16px;stroke:var(--green);fill:none;stroke-width:2}
+.results{display:flex;flex-direction:column;gap:10px}
+.result{border-radius:10px;padding:1rem 1.1rem;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.result.r-summary{background:var(--green-light);border:1px solid #b8d9c4}
+.result.r-flag{background:var(--red-light);border:1px solid #e8b8b8}
+.result.r-q{background:var(--gold-light);border:1px solid #e8d8a0}
+.r-icon{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-top:1px}
+.r-summary .r-icon{background:var(--green);color:var(--white)}
+.r-flag .r-icon{background:var(--red);color:var(--white)}
+.r-q .r-icon{background:var(--gold);color:var(--white)}
+.r-title{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.r-summary .r-title{color:var(--green)}
+.r-flag .r-title{color:var(--red)}
+.r-q .r-title{color:var(--gold)}
+.r-text{font-size:.875rem;line-height:1.55;color:var(--ink)}
+
+/* TRUST BAR */
+.trust{background:var(--black);padding:1.25rem 2rem;text-align:center}
+.trust p{font-size:.82rem;color:#888;letter-spacing:.04em}
+.trust span{color:var(--white);font-weight:500}
+
+/* SECTIONS */
+.section{max-width:860px;margin:0 auto;padding:5rem 2rem}
+.section-tag{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--green);margin-bottom:.85rem}
+h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:700;line-height:1.2;margin-bottom:1.1rem;color:var(--black)}
+h2 em{font-style:italic;color:var(--green)}
+.lead{font-size:1rem;color:var(--muted);max-width:520px;line-height:1.7;margin-bottom:2rem}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-top:2rem}
+.stat-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.5rem 1.25rem}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:700;color:var(--gold);line-height:1}
+.stat-card p{font-size:.85rem;color:var(--muted);margin-top:.4rem;line-height:1.45}
+
+/* HOW IT WORKS */
+.how-wrap{background:var(--paper);padding:5rem 2rem}
+.how-inner{max-width:680px;margin:0 auto}
+.steps{margin-top:2.5rem;display:flex;flex-direction:column;gap:0}
+.step{display:grid;grid-template-columns:52px 1fr;gap:1.25rem;align-items:start;position:relative;padding-bottom:2.25rem}
+.step:last-child{padding-bottom:0}
+.step:not(:last-child)::after{content:'';position:absolute;left:25px;top:52px;bottom:0;width:2px;background:var(--border)}
+.s-num{width:52px;height:52px;border-radius:50%;background:var(--green);color:var(--white);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.35rem;flex-shrink:0;position:relative;z-index:1}
+.s-body h3{font-size:1.05rem;font-weight:600;margin-bottom:.3rem;color:var(--black)}
+.s-body p{font-size:.9rem;color:var(--muted);line-height:1.6}
+
+/* DOC TYPES */
+.doc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.65rem;margin-top:2rem}
+.doc-chip{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:.65rem 1rem;font-size:.85rem;color:var(--ink);display:flex;align-items:center;gap:7px}
+.doc-chip::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0}
+
+/* TESTIMONIALS */
+.testimonials-wrap{background:var(--black);padding:5rem 2rem}
+.testimonials-inner{max-width:860px;margin:0 auto}
+.testimonials-inner .section-tag{color:var(--gold)}
+.testimonials-inner h2{color:var(--white)}
+.t-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:2rem}
+.t-card{background:#1a1a16;border:1px solid #2e2e28;border-radius:12px;padding:1.5rem}
+.stars{color:var(--gold);font-size:13px;letter-spacing:2px;margin-bottom:.75rem}
+.t-card p{font-size:.88rem;color:#b0ab9e;line-height:1.65;margin-bottom:1rem}
+.t-author{display:flex;align-items:center;gap:9px}
+.ava{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:600}
+.t-author span{font-size:.8rem;color:#6b6558}
+
+/* PRICING */
+.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;margin-top:2.5rem}
+.p-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:2rem}
+.p-card.featured{background:var(--green);border-color:var(--green);color:var(--white)}
+.p-tier{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.85rem;color:var(--muted)}
+.p-card.featured .p-tier{color:#a8d4b8}
+.p-price{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;line-height:1;color:var(--black)}
+.p-card.featured .p-price{color:var(--white)}
+.p-per{font-size:.82rem;color:var(--muted);margin-bottom:1.5rem}
+.p-card.featured .p-per{color:#a8d4b8}
+.p-features{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.75rem}
+.p-features li{font-size:.88rem;display:flex;align-items:flex-start;gap:8px;color:var(--ink)}
+.p-card.featured .p-features li{color:#d0ead9}
+.p-features li::before{content:'✓';flex-shrink:0;margin-top:1px;color:var(--green)}
+.p-card.featured .p-features li::before{color:var(--gold)}
+.btn-green{display:block;text-align:center;background:var(--black);color:var(--white);padding:.9rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:.95rem;transition:opacity .2s}
+.btn-green:hover{opacity:.85}
+.p-card.featured .btn-green{background:var(--white);color:var(--green)}
+.btn-outline-green{display:block;text-align:center;background:transparent;color:var(--ink);padding:.9rem;border-radius:8px;text-decoration:none;font-weight:500;font-size:.95rem;border:1px solid var(--border);transition:background .2s}
+.btn-outline-green:hover{background:var(--paper)}
+
+/* FAQ */
+.faq{max-width:640px;margin:2rem auto 0}
+details{border-bottom:1px solid var(--border);padding:1.1rem 0}
+summary{font-weight:500;font-size:.95rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;color:var(--black)}
+summary::after{content:'+';font-size:1.2rem;color:var(--muted)}
+details[open] summary::after{content:'−'}
+details p{font-size:.9rem;color:var(--muted);margin-top:.7rem;line-height:1.65}
+
+/* FOOTER CTA */
+.footer-hero{background:var(--paper);padding:5rem 2rem;text-align:center;border-top:1px solid var(--border)}
+.footer-hero h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--black);margin-bottom:1rem}
+.footer-hero h2 em{color:var(--green);font-style:italic}
+.footer-hero p{color:var(--muted);margin-bottom:2rem;max-width:440px;margin-left:auto;margin-right:auto;font-size:.95rem}
+footer{text-align:center;padding:1.5rem;font-size:.78rem;color:var(--muted);border-top:1px solid var(--border)}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--ink)}
+
+@media(max-width:600px){nav{padding:1rem 1.25rem}.hero{padding:3.5rem 1.25rem 2rem}.section{padding:3.5rem 1.25rem}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#">
+    <div class="logo-mark">
+      <svg viewBox="0 0 18 18"><path d="M2 3.5h14v2H2v-2zm0 4.5h9v2H2V8zm0 4.5h6v2H2v-2z"/></svg>
+    </div>
+    Fine Print
+  </a>
+  <a class="nav-cta" href="https://jesterchaos.gumroad.com/l/akeidk">Get Access — $9.99/mo</a>
+</nav>
+
+<section class="hero">
+  <div class="tag">AI Document Analysis</div>
+  <h1>The <span>fine print</span><br>you never had<br>time to read</h1>
+  <p>Upload any financial document and get a plain-English breakdown — what it says, what to watch out for, and what to ask next. In under 30 seconds.</p>
+  <a class="btn-main" href="https://jesterchaos.gumroad.com/l/akeidk">
+    <svg viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm1 4.75a.75.75 0 00-1.5 0v3.5H7.75a.75.75 0 000 1.5H9.5v3.5a.75.75 0 001.5 0v-3.5h2.75a.75.75 0 000-1.5H11V6.75z"/></svg>
+    Start Free Trial — $9.99/mo
+  </a>
+  <p class="hero-note">7-day free trial · No credit card required · Cancel anytime</p>
+</section>
+
+<div class="preview-wrap">
+  <p class="preview-label">Live example — 401k plan analysis</p>
+  <div class="browser">
+    <div class="browser-bar">
+      <div class="dot" style="background:#ff5f57"></div>
+      <div class="dot" style="background:#febc2e"></div>
+      <div class="dot" style="background:#28c840"></div>
+      <div class="url-bar">app.fineprint.ai/analyze</div>
+    </div>
+    <div class="browser-body">
+      <div class="file-badge">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><polyline points="14 2 14 8 20 8"/></svg>
+        employer_401k_benefits_2026.pdf — 47 pages · Analyzed in 18 seconds
+      </div>
+      <div class="results">
+        <div class="result r-summary">
+          <div class="r-icon">📋</div>
+          <div>
+            <div class="r-title">Plain-English Summary</div>
+            <div class="r-text">This is your employer retirement plan. You can put up to $23,500/yr in pre-tax. Your employer matches 50 cents for every dollar you put in, up to 6% of your salary — meaning if you earn $60K and contribute less than 6%, you're leaving up to <strong>$1,800/year in free money</strong> behind.</div>
+          </div>
+        </div>
+        <div class="result r-flag">
+          <div class="r-icon">⚠</div>
+          <div>
+            <div class="r-title">2 Red Flags Found</div>
+            <div class="r-text">① 3-year vesting cliff — you lose all employer contributions if you leave before year 3. ② Your default fund is a money market account earning 1.2% — this is likely too conservative for your age. You can change it yourself in 5 minutes.</div>
+          </div>
+        </div>
+        <div class="result r-q">
+          <div class="r-icon">?</div>
+          <div>
+            <div class="r-title">3 Questions to Ask HR</div>
+            <div class="r-text">① "Can I switch my default investment to a target-date fund?" ② "What is the exact vesting schedule — cliff or graded?" ③ "Is a Roth 401k option available in this plan?"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="trust" style="margin-top:3.5rem">
+  <p>Trusted by <span>12,000+ people</span> who finally understand their financial documents &nbsp;·&nbsp; <span>$4.2M</span> in hidden fees and missed benefits uncovered &nbsp;·&nbsp; <span>4.9★</span> average rating</p>
+</div>
+
+<section class="section">
+  <div class="section-tag">The problem</div>
+  <h2>Financial documents are written<br>for lawyers. <em>Not for you.</em></h2>
+  <p class="lead">The average American receives 40+ financial documents per year — and most people sign them without understanding a single clause. That costs real money.</p>
+  <div class="stats">
+    <div class="stat-card"><div class="stat-num">57%</div><p>of Americans fail a basic financial literacy test</p></div>
+    <div class="stat-card"><div class="stat-num">$1,200</div><p>left on the table yearly from misunderstood benefits</p></div>
+    <div class="stat-card"><div class="stat-num">40+</div><p>financial documents the average person receives per year</p></div>
+    <div class="stat-card"><div class="stat-num">31%</div><p>of Americans have any written financial plan at all</p></div>
+  </div>
+</section>
+
+<div class="how-wrap">
+  <div class="how-inner">
+    <div class="section-tag">How it works</div>
+    <h2>Three steps to total clarity</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="s-num">1</div>
+        <div class="s-body">
+          <h3>Upload your document</h3>
+          <p>PDF, image, or paste in text. Fine Print handles 401k plans, loan agreements, insurance policies, leases, credit card terms, employee benefit summaries, and more.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="s-num">2</div>
+        <div class="s-body">
+          <h3>AI reads every page in seconds</h3>
+          <p>Fine Print is trained specifically on financial documents. It finds what matters, flags what's risky, and ignores the boilerplate legalese that fills 80% of most documents.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="s-num">3</div>
+        <div class="s-body">
+          <h3>Get your plain-English report</h3>
+          <p>A clear summary of what it says, any hidden catches or red flags, and three ready-made questions to bring to your advisor, HR department, or lender.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-tag">Document types</div>
+  <h2>If it's financial,<br><em>we can explain it</em></h2>
+  <div class="doc-grid">
+    <div class="doc-chip">401k &amp; 403b Plans</div>
+    <div class="doc-chip">Mortgage Documents</div>
+    <div class="doc-chip">Insurance Policies</div>
+    <div class="doc-chip">Loan Agreements</div>
+    <div class="doc-chip">Lease Agreements</div>
+    <div class="doc-chip">Credit Card Terms</div>
+    <div class="doc-chip">Employee Benefits</div>
+    <div class="doc-chip">Stock &amp; Equity Plans</div>
+    <div class="doc-chip">Tax Documents</div>
+    <div class="doc-chip">Medical Bills / EOBs</div>
+    <div class="doc-chip">Retirement Summaries</div>
+    <div class="doc-chip">Severance Agreements</div>
+  </div>
+</section>
+
+<div class="testimonials-wrap">
+  <div class="testimonials-inner">
+    <div class="section-tag">Reviews</div>
+    <h2>Real people. Real clarity.</h2>
+    <div class="t-grid">
+      <div class="t-card">
+        <div class="stars">★★★★★</div>
+        <p>"Had the same 401k for 8 years and never understood it. Fine Print showed me I was losing $2,100/yr in employer match. Fixed it in a day."</p>
+        <div class="t-author"><div class="ava" style="background:#1c4a2e;color:#a8d4b8">MR</div><span>Marcus R., 34 — Denver, CO</span></div>
+      </div>
+      <div class="t-card">
+        <div class="stars">★★★★★</div>
+        <p>"My lease had a clause that would have cost me $1,800 at move-out. Fine Print caught it in the red flags section immediately."</p>
+        <div class="t-author"><div class="ava" style="background:#3d2a5c;color:#c4a8d4">TK</div><span>Tamara K., 28 — Austin, TX</span></div>
+      </div>
+      <div class="t-card">
+        <div class="stars">★★★★★</div>
+        <p>"Used to pay my accountant $200/hr just to explain docs. Now I come to every meeting with actual informed questions. Game changer."</p>
+        <div class="t-author"><div class="ava" style="background:#5c1a1a;color:#d4a8a8">JH</div><span>James H., 52 — Chicago, IL</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="section" id="pricing">
+  <div class="section-tag">Pricing</div>
+  <h2>Simple pricing.<br><em>Unlimited clarity.</em></h2>
+  <div class="price-grid">
+    <div class="p-card">
+      <div class="p-tier">One-Time</div>
+      <div class="p-price">$4.99</div>
+      <div class="p-per">per document</div>
+      <ul class="p-features">
+        <li>Single document analysis</li>
+        <li>Plain-English summary</li>
+        <li>Red flag detection</li>
+        <li>3 advisor questions</li>
+        <li>Instant PDF report</li>
+      </ul>
+      <a class="btn-outline-green" href="https://jesterchaos.gumroad.com/l/yixbfk">Buy One Report</a>
+    </div>
+    <div class="p-card featured">
+      <div class="p-tier">★ Most Popular</div>
+      <div class="p-price">$9.99</div>
+      <div class="p-per">per month · cancel anytime</div>
+      <ul class="p-features">
+        <li>Unlimited documents</li>
+        <li>Full analysis every time</li>
+        <li>Priority processing</li>
+        <li>Document history saved</li>
+        <li>7-day free trial included</li>
+      </ul>
+      <a class="btn-green" href="https://jesterchaos.gumroad.com/l/akeidk">Start Free Trial</a>
+    </div>
+  </div>
+  <p style="text-align:center;font-size:.8rem;color:var(--muted);margin-top:1.1rem">No surprise charges · No annual lock-in · Cancel in one click</p>
+</section>
+
+<section class="section" style="max-width:720px">
+  <div class="section-tag">FAQ</div>
+  <h2>Common questions</h2>
+  <div class="faq">
+    <details>
+      <summary>Is my document kept private?</summary>
+      <p>Yes. Documents are analyzed then immediately deleted — nothing is stored after your report is delivered. We never use your documents to train AI.</p>
+    </details>
+    <details>
+      <summary>What file types can I upload?</summary>
+      <p>PDFs work best. We also accept Word documents (.docx), images (JPG, PNG), and plain text. Most files upload in under 5 seconds.</p>
+    </details>
+    <details>
+      <summary>Is this a replacement for a financial advisor?</summary>
+      <p>No — Fine Print helps you understand what a document says. For decisions about what to do, you should still talk to a licensed advisor. We make that conversation smarter and faster.</p>
+    </details>
+    <details>
+      <summary>How long does analysis take?</summary>
+      <p>Most documents are analyzed in under 30 seconds. Documents over 100 pages may take up to 2 minutes.</p>
+    </details>
+    <details>
+      <summary>What if the report isn't useful?</summary>
+      <p>Full refund within 7 days, no questions asked. If Fine Print didn't save you time or money, we don't want your money either.</p>
+    </details>
+  </div>
+</section>
+
+<div class="footer-hero">
+  <h2>Stop guessing.<br>Start reading the <em>Fine Print</em>.</h2>
+  <p>Join thousands of people who finally know exactly what their financial documents say — and what to do about it.</p>
+  <a class="btn-main" href="https://jesterchaos.gumroad.com/l/akeidk">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm1 4.75a.75.75 0 00-1.5 0v3.5H7.75a.75.75 0 000 1.5H9.5v3.5a.75.75 0 001.5 0v-3.5h2.75a.75.75 0 000-1.5H11V6.75z"/></svg>
+    Start Free Trial — $9.99/mo
+  </a>
+  <p style="font-size:.8rem;color:var(--muted);margin-top:.8rem">7-day free trial · Cancel anytime · Instant access</p>
+</div>
+
+<footer>
+  © 2026 Fine Print &nbsp;·&nbsp; <a href="#">Privacy</a> &nbsp;·&nbsp; <a href="#">Terms</a> &nbsp;·&nbsp; <a href="#">Contact</a>
+</footer>
+
+</body>
+</html>
